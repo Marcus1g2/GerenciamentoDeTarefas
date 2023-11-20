@@ -1,0 +1,41 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@namespace GerenciamentoDeTarefas.Models.Enums
+@model Usuario
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Cadrastro" method="post">
+            <div class="form-group">
+                <label asp-for="Nome" class="form-control"> Nome </label>
+                <input asp-for="Nome" class="control-form"  type="text"  />
+                <span asp-validation-for="Nome" class="text-black text-danger"></span>
+            </div>   
+            <div class="form-group">
+                <label asp-for="Email" class="form-control"> Email </label>
+                <input asp-for="Email" class="control-form"  type="email"  />
+                <span asp-validation-for="Email" class="text-black text-danger"></span>
+            </div>   
+            <div class="form-group">
+                <label asp-for="Senha" class="form-control"> Senha </label>
+                <input asp-for="Senha" class="control-form"  type="password"  />
+                <span asp-validation-for="Senha" class="text-black text-danger"></span>
+            </div> 
+            <div class="form-group">
+                <input asp-for="DataAtual" class="control-form"  type="hidden"  />
+            </div>
+            <div class="form-group">
+                <label asp-for="Perfil" class="form-control"> Perfil </label>
+                <select asp-for="Perfil" asp-items="Html.GetEnumSelectList<PerfilEnum>()" > </select>
+                <span asp-validation-for="Perfil" class="text-black text-danger"></span>
+            </div>
+
+            <input type="submit" value="Cadrastro" class="btn btn-primary" />
+        </form>
+    </div>
+</div>
+<div>
+    <button asp-action="Index" class="btn btn-outline-danger">Voltar</button>
+</div>

@@ -1,0 +1,49 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using GerenciamentoDeTarefas.Models.Enums
+@model IEnumerable<Usuario>
+@{
+    ViewData["User"] = "Usuarios";
+}
+<h1>@ViewData["User"]</h1>
+
+<p>
+    <a asp-action="Cadrastro" class="btn btn-outline-primary"> Cadrastro </a>
+</p>
+
+<table class="table table-striped ">
+    <thead>
+    <th>
+    <td>
+                @Html.DisplayNameFor(d=>d.Nome)
+    </td>
+    <td>
+                @Html.DisplayNameFor(d=>d.Email)
+    </td> 
+    <td>
+                @Html.DisplayNameFor(d=>d.DataAtual)
+    </td>
+    <td>
+                @Html.DisplayNameFor(d=>d.Perfil)
+    </td>
+    </th>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <th>
+        <td>
+                    @Html.DisplayFor(d=>item.Nome)
+        </td>
+        <td>
+                    @Html.DisplayFor(d=>item.Email)
+        </td> 
+        <td>
+                    @Html.DisplayFor(d=>item.DataAtual)
+        </td>
+   
+        </th>
+        }
+    </tbody>
+</table>

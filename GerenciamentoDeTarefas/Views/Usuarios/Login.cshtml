@@ -1,0 +1,30 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model Usuario
+
+<h1>Login </h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Login">
+            <div class="col-form-label">
+                <label asp-for="Email" class="control-form"> Email </label>
+                <input asp-for="Email" class="form-control" type="email" />
+            </div>
+            <div class="col-form-label">
+                <label asp-for="Senha" class="control-form">Senha </label>
+                <input asp-for="Senha" class="form-control" type="password" />
+            </div>
+            <div class="col-form-label">
+                <input type="submit" class="btn btn-outline-primary" value="Login" />
+                
+            </div>
+        </form>
+        <div class="col-form-label">
+            <button asp-action="Cadrastro" class="btn btn-danger">Cadrastrar </button>
+        </div>
+    </div>
+</div>
