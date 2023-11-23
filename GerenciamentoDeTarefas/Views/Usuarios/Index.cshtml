@@ -14,36 +14,39 @@
 
 <table class="table table-striped ">
     <thead>
-    <th>
-    <td>
+        <tr>
+            <th>
                 @Html.DisplayNameFor(d=>d.Nome)
-    </td>
-    <td>
+            </th>
+            <th>
                 @Html.DisplayNameFor(d=>d.Email)
-    </td> 
-    <td>
+            </th>
+            <th>
                 @Html.DisplayNameFor(d=>d.DataAtual)
-    </td>
-    <td>
+            </th>
+            <th>
                 @Html.DisplayNameFor(d=>d.Perfil)
-    </td>
-    </th>
+            </th>
+        </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-        <th>
+        <tr>
         <td>
                     @Html.DisplayFor(d=>item.Nome)
         </td>
         <td>
                     @Html.DisplayFor(d=>item.Email)
-        </td> 
+        </td>
         <td>
                     @Html.DisplayFor(d=>item.DataAtual)
+        </td> 
+        <td>
+                    @Html.DisplayFor(d=>item.Perfil)
         </td>
-   
-        </th>
+
+        </tr>
         }
     </tbody>
 </table>

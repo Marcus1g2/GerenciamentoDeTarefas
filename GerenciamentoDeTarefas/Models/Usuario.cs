@@ -19,8 +19,13 @@ public class Usuario
     
     public string Senha { get; set; }
 
-    public DateTime DataAtual { get; set; }
+    public DateTime DataAtual { get; set; } 
     [Required(ErrorMessage = "Selecione Perfil obrigatório")]
-    public PerfilEnum  Perfil { get; set; }
+    public String  Perfil { get; set; }
+
+
+  
 
 }
+
+

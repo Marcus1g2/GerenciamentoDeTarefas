@@ -5,9 +5,9 @@
 }
 @model Usuario
 
-<h1>Login </h1>
+<h1 class="text-center">Login </h1>
 
-<div class="row">
+<div class="row justify-content-center my-4">
     <div class="col-md-4">
         <form asp-action="Login">
             <div class="col-form-label">
@@ -24,7 +24,16 @@
             </div>
         </form>
         <div class="col-form-label">
-            <button asp-action="Cadrastro" class="btn btn-danger">Cadrastrar </button>
+            <a asp-action="Cadrastro" class="btn btn-danger">Cadrastro </a>
         </div>
+       
+            @if (TempData["Erro"] != null){
+            
+             <div class="alert-danger">
+                 @TempData["Erro"]
+            </div>
+
+            }
+       
     </div>
 </div>

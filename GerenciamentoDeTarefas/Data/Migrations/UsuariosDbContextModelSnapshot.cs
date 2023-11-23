@@ -37,8 +37,9 @@ namespace GerenciamentoDeTarefas.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50)");
 
-                    b.Property<int>("Perfil")
-                        .HasColumnType("int");
+                    b.Property<string>("Perfil")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Senha")
                         .IsRequired()

@@ -1,6 +1,7 @@
 ﻿using GerenciamentoDeTarefas.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.Globalization;
 
 namespace GerenciamentoDeTarefas.Controllers
 {
@@ -23,16 +24,18 @@ namespace GerenciamentoDeTarefas.Controllers
 
         public IActionResult Cadrastro()
         {
-            return View();
+            var usuario=new Usuario();
+            return View(usuario);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Cadrastro([Bind("Id", "Nome", "Email", "Senha")] Usuario usuario)
+        public IActionResult Cadrastro([Bind("Id", "Nome", "Email", "Senha", "Perfil")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
                 usuario.DataAtual = DateTime.Now;
+
                 _context.Usuarios.Add(usuario);
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
@@ -48,16 +51,15 @@ namespace GerenciamentoDeTarefas.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Login(string email, string senha)
         {
-
-            var User = _context.Usuarios.FirstOrDefault(f => f.Email == email && f.Senha == senha);
-
-            if (User != null)
+            var UserId = _context.Usuarios.SingleOrDefault(s=>s.Email == email && s.Senha==senha);
+            if (UserId != null)
             {
-                HttpContext.Session.SetString("UserId", User.Id.ToString());
+                HttpContext.Session.SetString("UserId", UserId.Id.ToString());
                 return RedirectToAction(nameof(Acesso));
             }
-            ModelState.AddModelError(String.Empty, "Login ou senha invalidos");
+            TempData["Erro"] = "Email ou senha incorreto(s)";
             return View();
+
         }
         public IActionResult Acesso()
         {

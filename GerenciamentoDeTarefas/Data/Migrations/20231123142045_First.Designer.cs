@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GerenciamentoDeTarefas.Data.Migrations
 {
     [DbContext(typeof(UsuariosDbContext))]
-    [Migration("20231119211423_First")]
+    [Migration("20231123142045_First")]
     partial class First
     {
         /// <inheritdoc />
@@ -40,8 +40,9 @@ namespace GerenciamentoDeTarefas.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50)");
 
-                    b.Property<int>("Perfil")
-                        .HasColumnType("int");
+                    b.Property<string>("Perfil")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Senha")
                         .IsRequired()
