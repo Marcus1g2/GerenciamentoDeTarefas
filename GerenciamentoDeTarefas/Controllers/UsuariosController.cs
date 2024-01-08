@@ -1,6 +1,7 @@
 ﻿using GerenciamentoDeTarefas.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 
 namespace GerenciamentoDeTarefas.Controllers
@@ -30,14 +31,14 @@ namespace GerenciamentoDeTarefas.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Cadrastro([Bind("Id", "Nome", "Email", "Senha", "Perfil")] Usuario usuario)
+        public async Task<IActionResult> Cadrastro([Bind("Id", "Nome", "Email", "Senha", "Perfil")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
                 usuario.DataAtual = DateTime.Now;
 
                 _context.Usuarios.Add(usuario);
-                _context.SaveChanges();
+                _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(usuario);
@@ -49,13 +50,13 @@ namespace GerenciamentoDeTarefas.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Login(string email, string senha)
+        public async Task<IActionResult> Login(string email, string senha)
         {
-            var UserId = _context.Usuarios.SingleOrDefault(s=>s.Email == email && s.Senha==senha);
+            var UserId = _context.Usuarios.SingleOrDefaultAsync(s=>s.Email == email && s.Senha==senha);
             if (UserId != null)
             {
                 HttpContext.Session.SetString("UserId", UserId.Id.ToString());
-                return RedirectToAction(nameof(Acesso));
+                return RedirectToAction("Create","Tarefas");
             }
             TempData["Erro"] = "Email ou senha incorreto(s)";
             return View();

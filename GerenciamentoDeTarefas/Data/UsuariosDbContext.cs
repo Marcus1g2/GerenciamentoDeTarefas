@@ -12,6 +12,7 @@ namespace GerenciamentoDeTarefas.Data
         }
 
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Tarefa> Tarefas { get; set; }
 
 
     }
