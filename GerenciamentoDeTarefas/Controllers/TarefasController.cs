@@ -16,23 +16,24 @@ namespace GerenciamentoDeTarefas.Controllers
 
 
 
-      
-        public async Task<IActionResult> Create()
+
+        public IActionResult Create()
         {
-           
-            return View();
+            var tarefa = new Tarefa();
+            return View(tarefa);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task <IActionResult>Create([Bind("Id", "Name", "Comentario", "Prazo", "UsuarioId")] Tarefa tarefa)
+        public async Task<IActionResult>
+            Create([Bind("Id", "Name", "Comentario", "Prazo")] Tarefa tarefa)
         {
             if (ModelState.IsValid)
             {
-
+                tarefa.Prazo = DateTime.Now;
                 _context.Tarefas.Add(tarefa);
-                _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index","Usuarios");
             }
             return View(tarefa);
         }

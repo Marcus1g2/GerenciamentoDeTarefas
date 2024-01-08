@@ -25,20 +25,20 @@ namespace GerenciamentoDeTarefas.Controllers
 
         public IActionResult Cadrastro()
         {
-            var usuario=new Usuario();
+            var usuario = new Usuario();
             return View(usuario);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Cadrastro([Bind("Id", "Nome", "Email", "Senha", "Perfil")] Usuario usuario)
+        public async Task<IActionResult>
+            Cadrastro([Bind("Id", "Nome", "Email", "Senha", "Perfil")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
                 usuario.DataAtual = DateTime.Now;
-
                 _context.Usuarios.Add(usuario);
-                _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(usuario);
@@ -52,11 +52,11 @@ namespace GerenciamentoDeTarefas.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(string email, string senha)
         {
-            var UserId = _context.Usuarios.SingleOrDefaultAsync(s=>s.Email == email && s.Senha==senha);
+            var UserId = await _context.Usuarios.SingleOrDefaultAsync(s => s.Email == email && s.Senha == senha);
             if (UserId != null)
             {
                 HttpContext.Session.SetString("UserId", UserId.Id.ToString());
-                return RedirectToAction("Create","Tarefas");
+                return RedirectToAction("Create", "Tarefas");
             }
             TempData["Erro"] = "Email ou senha incorreto(s)";
             return View();
